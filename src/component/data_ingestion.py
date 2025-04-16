@@ -7,7 +7,8 @@ from sklearn.model_selection import train_test_split
 
 from src.exception import CustomException
 from src.logger import logging
-
+from src.component.data_transformation import DataTransformation
+from src.component.data_transformation import DataTransformationConfig
 
 @dataclass
 class DataIngestionConfig:
@@ -78,4 +79,9 @@ class DataIngestion:
 # Entry point of the script (only runs when executed directly)
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data = obj.initiate_data_ingestion()
+    logging.info("📥 Data ingestion completed. Now starting data transformation...")
+    data_transformation = DataTransformation()
+    logging.info("🔧 Initiating data transformation...")
+    data_transformation.initiate_data_transformation(train_data, test_data)
+    logging.info("✅ Data transformation completed successfully.")
