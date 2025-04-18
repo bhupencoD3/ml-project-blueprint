@@ -1,0 +1,47 @@
+
+RandomForest:
+  n_estimators: [100, 200, 300]
+  max_depth: [null, 10, 20, 30]
+  min_samples_split: [2, 5, 10]
+  min_samples_leaf: [1, 2, 4]
+  bootstrap: [True, False]
+
+DecisionTree:
+  criterion: ["squared_error", "friedman_mse"]
+  splitter: ["best", "random"]
+  max_depth: [null, 10, 20, 30]
+  min_samples_split: [2, 5, 10]
+  min_samples_leaf: [1, 2, 4]
+
+LinearRegression:
+  fit_intercept: [True, False]
+
+XGBRegressor:
+  n_estimators: [100, 200]
+  learning_rate: [0.01, 0.1, 0.2]
+  max_depth: [3, 6, 10]
+  subsample: [0.5, 0.7, 1.0]
+  colsample_bytree: [0.5, 0.7, 1.0]
+
+CatBoost:
+  depth: [4, 6, 10]
+  learning_rate: [0.01, 0.05, 0.1]
+  iterations: [100, 200]
+  l2_leaf_reg: [1, 3, 5]
+
+KNeighbors:
+  n_neighbors: [3, 5, 11, 19]
+  weights: ["uniform", "distance"]
+  algorithm: ["auto", "ball_tree", "kd_tree", "brute"]
+
+AdaBoost:
+  n_estimators: [50, 100, 200]
+  learning_rate: [0.01, 0.1, 1.0]
+  loss: ["linear", "square"]
+
+GradientBoosting:
+  n_estimators: [100, 200]
+  learning_rate: [0.01, 0.1, 0.2]
+  max_depth: [3, 5, 10]
+  min_samples_split: [2, 5, 10]
+  min_samples_leaf: [1, 2, 4]

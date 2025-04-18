@@ -1,25 +1,26 @@
-
-import sys
 import os
+import sys
 from dataclasses import dataclass
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from src.exception import CustomException
 from src.logger import logging
 from src.utils import save_object
+
 
 @dataclass
 class DataTransformationConfig:
     """
     Configuration class that holds the path where the preprocessor object will be saved.
     """
-    preprocessor_object_file_path: str = os.path.join('artifacts', 'preprocessor.pkl')
+
+    preprocessor_object_file_path: str = os.path.join("artifacts", "preprocessor.pkl")
 
 
 class DataTransformation:
@@ -44,33 +45,42 @@ class DataTransformation:
             logging.info("🔧 Creating preprocessing pipelines...")
 
             # Define feature types
-            numerical_columns = ['writing score', 'reading score']
+            numerical_columns = ["writing score", "reading score"]
             categorical_columns = [
-                'gender',
-                'race/ethnicity',
-                'parental level of education',
-                'lunch',
-                'test preparation course'
+                "gender",
+                "race/ethnicity",
+                "parental level of education",
+                "lunch",
+                "test preparation course",
             ]
 
             # Pipeline for numerical features
-            numerical_pipeline = Pipeline(steps=[
-                ('imputer', SimpleImputer(strategy='median')),
-                ('scaler', StandardScaler())
-            ])
+            numerical_pipeline = Pipeline(
+                steps=[
+                    ("imputer", SimpleImputer(strategy="median")),
+                    ("scaler", StandardScaler()),
+                ]
+            )
 
             # Pipeline for categorical features
-            categorical_pipeline = Pipeline(steps=[
-                ('imputer', SimpleImputer(strategy='most_frequent')),
-                ('encoder', OneHotEncoder(handle_unknown='ignore')),
-                ('scaler', StandardScaler(with_mean=False))  # Avoid dense matrix warning
-            ])
+            categorical_pipeline = Pipeline(
+                steps=[
+                    ("imputer", SimpleImputer(strategy="most_frequent")),
+                    ("encoder", OneHotEncoder(handle_unknown="ignore")),
+                    (
+                        "scaler",
+                        StandardScaler(with_mean=False),
+                    ),  # Avoid dense matrix warning
+                ]
+            )
 
             # Combine both into a single transformer
-            preprocessor = ColumnTransformer(transformers=[
-                ('numerical_pipeline', numerical_pipeline, numerical_columns),
-                ('categorical_pipeline', categorical_pipeline, categorical_columns)
-            ])
+            preprocessor = ColumnTransformer(
+                transformers=[
+                    ("numerical_pipeline", numerical_pipeline, numerical_columns),
+                    ("categorical_pipeline", categorical_pipeline, categorical_columns),
+                ]
+            )
 
             logging.info("✅ Preprocessor object created successfully.")
             return preprocessor
@@ -98,11 +108,11 @@ class DataTransformation:
             logging.info("🔧 Preparing transformation pipeline...")
             preprocessor = self.get_data_transformer_object()
 
-            target_column = 'math score'
+            target_column = "math score"
             columns_to_drop = [target_column]
 
-            if 'Unnamed: 0' in train_df.columns:
-                columns_to_drop.append('Unnamed: 0')
+            if "Unnamed: 0" in train_df.columns:
+                columns_to_drop.append("Unnamed: 0")
 
             # Split features and targets
             input_features_train = train_df.drop(columns=columns_to_drop, axis=1)
@@ -112,20 +122,28 @@ class DataTransformation:
             target_feature_test = test_df[target_column]
 
             logging.info("⚙️ Transforming datasets...")
-            input_features_train_array = preprocessor.fit_transform(input_features_train)
+            input_features_train_array = preprocessor.fit_transform(
+                input_features_train
+            )
             input_features_test_array = preprocessor.transform(input_features_test)
 
             # Combine transformed features with target
             train_array = np.c_[input_features_train_array, target_feature_train]
             test_array = np.c_[input_features_test_array, target_feature_test]
 
-            logging.info("✅ Transformation complete. Ready to save preprocessor separately.")
+            logging.info(
+                "✅ Transformation complete. Ready to save preprocessor separately."
+            )
             save_object(
                 file_path=self.data_transformation_config.preprocessor_object_file_path,
-                obj=preprocessor
+                obj=preprocessor,
             )
             logging.info("✅ Preprocessor object saved successfully.")
-            return train_array, test_array, self.data_transformation_config.preprocessor_object_file_path
+            return (
+                train_array,
+                test_array,
+                self.data_transformation_config.preprocessor_object_file_path,
+            )
 
         except Exception as e:
             logging.error("❌ Error occurred during data transformation.")

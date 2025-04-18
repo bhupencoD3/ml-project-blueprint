@@ -1,12 +1,10 @@
-
 import os
-import sys
 import pickle
-import pandas as pd
-import numpy as np
+import sys
 
 from src.exception import CustomException
 from src.logger import logging
+
 
 def save_object(file_path, obj):
     """
@@ -30,7 +28,7 @@ def save_object(file_path, obj):
         os.makedirs(directory_path, exist_ok=True)
 
         # Open the file in write-binary mode and dump the object using pickle
-        with open(file_path, 'wb') as file:
+        with open(file_path, "wb") as file:
             pickle.dump(obj, file)
 
         logging.info(f"📦 Object saved successfully at: {file_path}")

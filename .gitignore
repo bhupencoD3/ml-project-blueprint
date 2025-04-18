@@ -176,3 +176,5 @@ cython_debug/
 
 # pyproject toml
 pyproject.toml
+catboost_info
+notebook/catboost_info/
