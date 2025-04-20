@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome | Student Score Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <!-- 🌙/🌞 Theme Toggle + About Us -->
+  <div class="top-right">
+    <a href="/about" class="about-btn">About Us</a>
+    <div class="theme-toggle" onclick="toggleDarkMode()">
+      <span id="theme-icon">🌙</span>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>🎓 Welcome to the Student Performance Predictor</h1>
+    <p>Click below to start predicting student math scores based on various attributes.</p>
+    <a href="/predict" class="start-btn">Start Prediction</a>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

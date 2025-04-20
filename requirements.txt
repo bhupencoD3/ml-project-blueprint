@@ -8,4 +8,6 @@ catboost
 xgboost
 dill
 pyyaml
+flask
 #-e .
+

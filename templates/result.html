@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <h1>Prediction Result</h1>
+  <p>Predicted Math Score: <strong>{{ prediction }}</strong></p>
+  <a href="/predict">Try another prediction</a>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <!-- Loading Spinner -->
+  <div id="spinner">
+    <div class="spinner-circle"></div>
+  </div>
+</body>
+
+</html>
