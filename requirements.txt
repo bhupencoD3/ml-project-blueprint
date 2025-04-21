@@ -5,7 +5,7 @@ matplotlib
 ipykernel
 scikit-learn
 catboost
-xgboost
+#xgboost
 dill
 pyyaml
 flask

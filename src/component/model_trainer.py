@@ -13,7 +13,6 @@ from sklearn.ensemble import (
 from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
-from xgboost import XGBRegressor
 
 from src.component.model_hyperparameter_tuning import HyperparameterTuner
 from src.exception import CustomException
@@ -69,7 +68,7 @@ class ModelTrainer:
                 "RandomForest": RandomForestRegressor(),
                 "DecisionTree": DecisionTreeRegressor(),
                 "LinearRegression": LinearRegression(),
-                "XGBRegressor": XGBRegressor(),
+                #                "XGBRegressor": XGBRegressor(),
                 "CatBoost": CatBoostRegressor(verbose=0),
                 "KNeighbors": KNeighborsRegressor(),
                 "AdaBoost": AdaBoostRegressor(),

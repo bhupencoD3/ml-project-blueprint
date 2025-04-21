@@ -16,12 +16,12 @@ DecisionTree:
 LinearRegression:
   fit_intercept: [True, False]
 
-XGBRegressor:
-  n_estimators: [100, 200]
-  learning_rate: [0.01, 0.1, 0.2]
-  max_depth: [3, 6, 10]
-  subsample: [0.5, 0.7, 1.0]
-  colsample_bytree: [0.5, 0.7, 1.0]
+#XGBRegressor:
+#  n_estimators: [100, 200]
+#  learning_rate: [0.01, 0.1, 0.2]
+#  max_depth: [3, 6, 10]
+#  subsample: [0.5, 0.7, 1.0]
+#  colsample_bytree: [0.5, 0.7, 1.0] 
 
 CatBoost:
   depth: [4, 6, 10]
