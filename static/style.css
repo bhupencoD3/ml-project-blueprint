@@ -1,3 +1,5 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 
 /* General */
 body {
@@ -5,34 +7,77 @@ body {
   background-color: #f9f9f9;
   color: #222;
   transition: background-color 0.3s, color 0.3s;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dark-mode {
   background-color: #121212;
-  color: #e0e0e0;
+  color: #f0f0f0; /* Slightly lighter for contrast */
+}
+
+/* Fade animation for page transitions */
+.fade {
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(0);
+}
+
+.fade:not(.show) {
+  opacity: 0;
+  transform: translateY(20px); /* Slide-in effect */
 }
 
 /* Container */
 .container {
-  max-width: 600px;
-  margin: auto;
-  padding: 2rem;
-  background-color: white;
+  width: 500px;
+  height: 500px;
+  max-width: 80vw;
+  max-height: 80vw;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #ffffff, #f0f8ff); /* Subtle gradient */
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: background-color 0.3s;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Softer shadow */
+  transition: background-color 0.3s, transform 0.3s;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dark-mode .container {
-  background-color: #1e1e1e;
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
 }
 
 /* Form Elements */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 form label {
-  display: block;
+  display: flex;
+  align-items: center;
   margin-top: 1rem;
   font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+}
+
+.dark-mode form label {
+  color: #f0f0f0;
+}
+
+form label i {
+  margin-right: 0.5rem;
+  color: #4facfe; /* Accent color */
 }
 
 form input, form select {
@@ -41,16 +86,19 @@ form input, form select {
   border: 1px solid #aaa;
   border-radius: 6px;
   margin-top: 0.5rem;
-  transition: all 0.2s ease;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 form input:focus, form select:focus {
   border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3); /* Glow effect */
   outline: none;
 }
 
 /* Buttons */
-.submit-btn, .start-btn {
+.submit-btn, .start-btn, button {
   margin-top: 2rem;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
@@ -62,9 +110,67 @@ form input:focus, form select:focus {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.submit-btn:hover, .start-btn:hover {
+.submit-btn:hover, .start-btn:hover, button:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: pulse 1.5s infinite; /* Pulse effect */
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Shake animation for invalid form inputs */
+.shake {
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+/* Headings and Text */
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #4facfe; /* Accent color */
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+p, ul {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+}
+
+/* Links */
+a {
+  color: #007BFF;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 /* Top right nav (about + toggle) */
@@ -86,7 +192,6 @@ form input:focus, form select:focus {
   border-radius: 8px;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
 }
 
 .about-btn:hover {
@@ -95,24 +200,129 @@ form input:focus, form select:focus {
 }
 
 /* Theme toggle */
-.theme-toggle, .theme-toggle span {
+.theme-toggle {
   font-size: 1.8rem;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
 
 .theme-toggle:hover {
-  transform: scale(1.2) rotate(10deg);
+  transform: scale(1.2) rotate(360deg); /* Rotate on hover */
 }
 
-/* Responsive */
-@media (max-width: 600px) {
+/* Spinner (for result.html) */
+#spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.spinner-circle {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007BFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .container {
-    margin: 10px;
+    width: 70vw;
+    height: 70vw;
+    max-width: 400px;
+    max-height: 400px;
     padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p, ul, form label, form input, form select, .submit-btn, .start-btn, button {
+    font-size: 0.9rem;
+  }
+
+  form input, form select {
+    padding: 0.4rem;
+  }
+
+  .submit-btn, .start-btn, button {
+    padding: 0.6rem 1.2rem;
+  }
+
+  .top-right {
+    top: 15px;
+    right: 15px;
+    gap: 10px;
+  }
+
+  .about-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
   }
 
   .theme-toggle {
     font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 80vw;
+    height: 80vw;
+    max-width: 320px;
+    max-height: 320px;
+    padding: 1rem; /* Increased for better mobile feel */
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p, ul, form label, form input, form select {
+    font-size: 0.85rem;
+  }
+
+  form input, form select {
+    padding: 0.35rem;
+  }
+
+  .submit-btn, .start-btn, button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .top-right {
+    top: 10px;
+    right: 10px;
+    gap: 8px;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .about-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+
+  .theme-toggle {
+    font-size: 1.3rem;
   }
 }

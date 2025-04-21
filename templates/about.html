@@ -3,40 +3,35 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Us | Student Score Predictor</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-
-  <!-- 🔧 Proper theme toggle container + class for styling and JS to hook in -->
   <div class="top-right">
-    <div class="theme-toggle" onclick="toggleDarkMode()">
+    <a href="/" class="about-btn" aria-label="Go to Home page">Home</a>
+    <div class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
       <span id="theme-icon">🌙</span>
     </div>
   </div>
-
   <div class="container">
     <h1>About Us</h1>
     <p>Welcome to the Student Score Predictor! This project was developed by me, Bhupen Parmar, with the aim of
       predicting math scores based on various features such as gender, race, parental education level, and more.</p>
-
     <h2>About the Developer</h2>
     <p>I am Bhupen, a passionate developer and data science enthusiast. I am always excited to work on projects that
-      combine technology and real-world applications to solve problems. You can contact me at
-      <a href="mailto:bhupenparmar192@gmail.com">bhupenparmar192@gmail.com</a>.
-    </p>
-
+      combine technology and real-world applications to solve problems. You can contact me at <a
+        href="mailto:bhupenparmar192@gmail.com">bhupenparmar192@gmail.com</a>.</p>
     <h2>Project Features</h2>
     <ul>
       <li>Predicts student math scores based on input data</li>
       <li>Provides real-time predictions with an intuitive interface</li>
     </ul>
-
-    <a href="/"><button>Back to Home</button></a>
+    <a href="/" class="start-btn" aria-label="Go back to Home page">Back to Home</a>
   </div>
-
-  <script src="/static/script.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>

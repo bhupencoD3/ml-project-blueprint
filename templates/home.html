@@ -3,30 +3,30 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Input Features | Student Predictor</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-
-  <!-- 🔧 FIXED Top-Right Wrapper -->
   <div class="top-right">
-    <div class="theme-toggle" onclick="toggleDarkMode()">
+    <a href="/about" class="about-btn" aria-label="Go to About Us page">About Us</a>
+    <div class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
       <span id="theme-icon">🌙</span>
     </div>
   </div>
-
   <div class="container">
     <h2>🧠 Enter Student Details</h2>
     <form method="POST" action="/predict">
-      <label>Gender:</label>
-      <select name="gender" required>
+      <label><i class="fas fa-user"></i> Gender:</label>
+      <select name="gender" required aria-label="Select gender">
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
 
-      <label>Race/Ethnicity:</label>
-      <select name="race_ethnicity" required>
+      <label><i class="fas fa-globe"></i> Race/Ethnicity:</label>
+      <select name="race_ethnicity" required aria-label="Select race or ethnicity">
         <option value="group A">Group A</option>
         <option value="group B">Group B</option>
         <option value="group C">Group C</option>
@@ -34,8 +34,8 @@
         <option value="group E">Group E</option>
       </select>
 
-      <label>Parental Level of Education:</label>
-      <select name="parental_level_of_education" required>
+      <label><i class="fas fa-graduation-cap"></i> Parental Level of Education:</label>
+      <select name="parental_level_of_education" required aria-label="Select parental level of education">
         <option value="some high school">Some high school</option>
         <option value="high school">High school</option>
         <option value="some college">Some college</option>
@@ -44,28 +44,29 @@
         <option value="master's degree">Master's degree</option>
       </select>
 
-      <label>Lunch:</label>
-      <select name="lunch" required>
+      <label><i class="fas fa-utensils"></i> Lunch:</label>
+      <select name="lunch" required aria-label="Select lunch type">
         <option value="standard">Standard</option>
         <option value="free/reduced">Free/Reduced</option>
       </select>
 
-      <label>Test Preparation Course:</label>
-      <select name="test_preparation_course" required>
+      <label><i class="fas fa-book"></i> Test Preparation Course:</label>
+      <select name="test_preparation_course" required aria-label="Select test preparation course status">
         <option value="none">None</option>
         <option value="completed">Completed</option>
       </select>
 
-      <label>Reading Score (0–100):</label>
-      <input type="number" name="reading_score" min="0" max="100" required placeholder="Enter reading score out of 100">
+      <label><i class="fas fa-book-open"></i> Reading Score (0–100):</label>
+      <input type="number" name="reading_score" min="0" max="100" required placeholder="Enter reading score out of 100"
+        aria-label="Enter reading score">
 
-      <label>Writing Score (0–100):</label>
-      <input type="number" name="writing_score" min="0" max="100" required placeholder="Enter writing score out of 100">
+      <label><i class="fas fa-pen"></i> Writing Score (0–100):</label>
+      <input type="number" name="writing_score" min="0" max="100" required placeholder="Enter writing score out of 100"
+        aria-label="Enter writing score">
 
-      <button type="submit" class="submit-btn">🔮 Predict Math Score</button>
+      <button type="submit" class="submit-btn" aria-label="Predict math score">🔮 Predict Math Score</button>
     </form>
   </div>
-
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 

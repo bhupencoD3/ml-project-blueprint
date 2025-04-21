@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>Prediction Result</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Result | Student Score Predictor</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
-  <h1>Prediction Result</h1>
-  <p>Predicted Math Score: <strong>{{ prediction }}</strong></p>
-  <a href="/predict">Try another prediction</a>
-
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-
-  <!-- Loading Spinner -->
-  <div id="spinner">
-    <div class="spinner-circle"></div>
+  <div class="top-right">
+    <a href="/about" class="about-btn" aria-label="Go to About Us page">About Us</a>
+    <div class="theme-toggle" onclick="toggleDarkMode()" aria-label="Toggle dark mode">
+      <span id="theme-icon">🌙</span>
+    </div>
   </div>
+  <div class="container">
+    <h1>Prediction Result</h1>
+    <p>Predicted Math Score: <strong>{{ prediction }}</strong></p>
+    <a href="/predict" class="start-btn" aria-label="Try another prediction">Try another prediction</a>
+    <div id="spinner">
+      <div class="spinner-circle"></div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 
 </html>
