@@ -1,7 +1,6 @@
 import os
 import sys
 from dataclasses import dataclass
-from datetime import datetime
 
 import yaml
 from catboost import CatBoostRegressor
@@ -109,19 +108,13 @@ class ModelTrainer:
 
             logging.info(f"🏆 Best Model: {best_model_name} (R² = {best_score:.4f})")
 
-            # Add timestamp and model name to model file name
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-            model_file_path = self.config.model_file_path.replace(
-                "model.pkl", f"model_{best_model_name}_{timestamp}.pkl"
-            )
-
             # Save the best model
             save_object(
-                file_path=model_file_path,
+                file_path=self.config.model_file_path,
                 obj=best_model,
             )
 
-            logging.info(f"✅ Best model saved at: {model_file_path}")
+            logging.info(f"✅ Best model saved at: {self.config.model_file_path}")
             return best_model, best_score, best_model_name
 
         except Exception as e:
