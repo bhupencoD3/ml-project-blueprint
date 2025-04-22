@@ -109,7 +109,7 @@ To run the project locally:
 
 ```bash
 git clone https://github.com/bhupencoD3/ml-project-blueprint.git
-cd bhupencod3-ml-project-blueprint
+cd ml-project-blueprint
 pip install -r requirements.txt
 python application.py
 ```
